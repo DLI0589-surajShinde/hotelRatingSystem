@@ -1,7 +1,9 @@
 package com.ratingapplication.ratingservice.RatingService.controller;
 
+import com.ratingapplication.ratingservice.RatingService.dto.RatingDto;
 import com.ratingapplication.ratingservice.RatingService.entity.Rating;
 import com.ratingapplication.ratingservice.RatingService.service.RatingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,15 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ratings")
+@RequestMapping("/rating")
 public class RatingController {
 
     @Autowired
     private RatingService ratingService;
 
     @PostMapping
-    public ResponseEntity<Rating> addRating(@RequestBody Rating rating) {
-        Rating savedRating = ratingService.addRating(rating);
+    public ResponseEntity<Rating> addRating(@Valid @RequestBody RatingDto ratingDto) {
+        Rating savedRating = ratingService.addRating(ratingDto);
         return ResponseEntity.ok(savedRating);
     }
 
